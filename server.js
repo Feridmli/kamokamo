@@ -1,3 +1,4 @@
+// server.js
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -16,9 +17,7 @@ dotenv.config();
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY,
-  {
-    auth: { persistSession: false }
-  }
+  { auth: { persistSession: false } }
 );
 
 // -----------------------
@@ -72,8 +71,7 @@ app.get("/api/status", (req, res) => {
 // -----------------------
 app.post("/api/order", async (req, res) => {
   try {
-    const { tokenId, price, sellerAddress, seaportOrder, orderHash, image } =
-      req.body;
+    const { tokenId, price, sellerAddress, seaportOrder, orderHash, image } = req.body;
 
     if (!tokenId || (!price && price !== 0) || !sellerAddress || !seaportOrder) {
       return res.status(400).json({ success: false, error: "Missing parameters" });
@@ -139,10 +137,7 @@ app.post("/api/buy", async (req, res) => {
     const { orderHash, buyerAddress } = req.body;
 
     if (!orderHash || !buyerAddress) {
-      return res.status(400).json({
-        success: false,
-        error: "Missing orderHash or buyerAddress",
-      });
+      return res.status(400).json({ success: false, error: "Missing orderHash or buyerAddress" });
     }
 
     const { data, error } = await supabase
