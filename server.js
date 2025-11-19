@@ -117,7 +117,7 @@ app.get("/api/orders", async (req, res) => {
       .from("orders")
       .select("*")
       .eq("status", "active")
-      .order("createdAt", { ascending: false })
+      .order("createdat", { ascending: false })
       .limit(500);
 
     if (error) throw error;
